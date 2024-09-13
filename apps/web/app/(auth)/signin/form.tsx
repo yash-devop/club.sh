@@ -8,23 +8,6 @@ import { useState } from "react"
 export const authMethods = ["google", "github"] as const
 type AuthMethods = typeof authMethods[number]
 
-
-
-export const GoogleButton = () => {
-    return (
-        <>
-            <p>IM GOOGLE BTN</p>
-        </>
-    )
-}
-export const GithubButton = () => {
-    return (
-        <>
-            <p>IM Github BTN</p>
-        </>
-    )
-}
-
 export const LoginForm = () => {
     const [clickedMethod, setClickedMethod] = useState<AuthMethods | undefined>(undefined);
     const handleForm = async (e: React.FormEvent) => {
@@ -35,7 +18,9 @@ export const LoginForm = () => {
             })
         }
         else if (clickedMethod === "github") {
-            await signIn("github")
+            await signIn("github",{
+                callbackUrl: "/"
+            })
         }
         else {
             setClickedMethod(undefined)
