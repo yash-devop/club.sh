@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export const AuthLayout = ({
     variant,
     children
@@ -19,7 +17,7 @@ export const AuthLayout = ({
                             {children}
                         </div>
                     </div>
-                    <div className="text-sm">{variant === "login" ? <p>Don't have an account ? <Link className="underline" href={"/signup"}>Sign up</Link></p> : <p>Already have an account ? <Link className="underline" href={"/signin"}>Sign in</Link></p>}</div>
+                    {/* <div className="text-sm">{variant === "login" ? <p>Don't have an account ? <Link className="underline" href={"/signup"}>Sign up</Link></p> : <p>Already have an account ? <Link className="underline" href={"/signin"}>Sign in</Link></p>}</div> */}
                 
                 </div>
             </div>
