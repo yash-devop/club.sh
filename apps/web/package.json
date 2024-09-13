@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "lucide-react": "^0.441.0",
     "next": "14.2.6",
+    "next-auth": "^4.24.7",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@club/ui": "*",
-    "@club/typescript-config": "*",
     "@club/tailwind-config": "*",
+    "@club/typescript-config": "*",
+    "@club/ui": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
