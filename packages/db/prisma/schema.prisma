@@ -50,6 +50,7 @@ model User {
   admin         Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
+  Link          Link[]
 }
 
 model VerificationToken {
@@ -72,5 +73,9 @@ model Link {
   createdAt   DateTime?
   updatedAt   DateTime?
 
-  // @@index([shortCode])
+  // User who created the link ( foreign key setup )
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+
+  @@index(userId)
 }
