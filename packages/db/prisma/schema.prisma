@@ -42,12 +42,12 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?      @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
-  admin         Boolean      @default(false)
+  admin         Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
 }
@@ -58,4 +58,19 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+//
+
+model Link {
+  id          String    @id @default(cuid())
+  url         String    @db.VarChar()
+  shortCode   String    @unique
+  title       String?
+  description String?   @db.VarChar(280)
+  expiresAt   DateTime?
+  createdAt   DateTime?
+  updatedAt   DateTime?
+
+  // @@index([shortCode])
 }
