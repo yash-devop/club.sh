@@ -1,9 +1,11 @@
 import DashboardHeader from "@/app/components/dashboard/DashboardHeader"
 import LinksContainer from "@/app/components/dashboard/LinksContainer"
+import LinksHeader from "@/app/components/dashboard/LinksHeader"
 import {
     Avatar,
     AvatarFallback,
-    AvatarImage
+    AvatarImage,
+    cn
 } from '@club/ui'
 
 import {
@@ -19,8 +21,8 @@ import {LogOut} from 'lucide-react'
 export default function DashboardPage() {
     return (
         <>
-            <div className="w-full min-h-screen h-screen ">
-                <div>
+            <div className="w-full min-h-screen bg-gray-50 ">
+                <div className="">
                     <MaxWidthContainer className="flex items-center justify-between gap-3 p-5 ">
                         <p className="text-xl md:text-2xl font-semibold tracking-[-2px]">club.url </p>
 
@@ -50,17 +52,10 @@ export default function DashboardPage() {
                         <DashboardHeader />
                     </MaxWidthContainer>
                 </BorderContainer>
-                <div className="h-full w-full bg-gray-50">
                     <MaxWidthContainer className="px-4 md:px-8 py-14">
-                        <div className="flex items-center justify-between pb-5">
-                            <p className="font-medium text-2xl tracking-tight pl-3 md:p-0">Links</p>
-                            <div className="bg-red-400 px-5 py-2 rounded-lg">
-                                <p>Create Link C</p>
-                            </div>
-                        </div>
+                        <LinksHeader />
                         <LinksContainer />
                     </MaxWidthContainer>
-                </div>
             </div>
         </>
     )
@@ -68,13 +63,15 @@ export default function DashboardPage() {
 
 
 const BorderContainer = ({
-    children
+    children,
+    className
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    className?: string
 }) => {
     return (
         <>
-            <div className="border-b">
+            <div className={cn(`border-b bg-white`,className)}>
                 {children}
             </div>
         </>
