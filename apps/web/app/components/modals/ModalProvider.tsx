@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, ReactNode, useContext } from "react";
+import { createContext, ReactNode } from "react";
 import { useCreateLinkModal } from "./create-link-modal";
 
 type ModalContextProps = {
