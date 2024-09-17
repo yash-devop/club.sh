@@ -7,6 +7,9 @@ import LinkLabel from "../dashboard/LinkLabel";
 
 export function useCreateLinkModal() {
     const [showCreateLinkModal, setShowCreateLinkModal] = useState<boolean>(false);
+    const [data , setData ] = useState({
+        url: ""
+    })
     const CreateModalCallback = useCallback(() => (       // return
         <Modal
             showModal={showCreateLinkModal}
@@ -15,7 +18,7 @@ export function useCreateLinkModal() {
             <div className="flex flex-col lg:flex-row w-full divide-x-2 h-full overflow-auto lg:overflow-hidden">
                 <div className="flex flex-col justify-between w-full h-full">
                     <div className="w-full flex flex-col h-full overflow-auto">
-                        <div className="border-b bg-whitse px-5 py-9 text-center flex items-center justify-center gap-2 h-fit rounded-l-lg sticky top-0 lg:static">
+                        <div className="border-b bg-white px-5 py-9 text-center flex items-center justify-center gap-2 h-fit  rounded-tl-lg sticky top-0 lg:static">
                             <Globe size={24} />
                             <p>Create a new link</p>
                         </div>
@@ -30,7 +33,7 @@ export function useCreateLinkModal() {
                                         logo={<HelpCircle size={15} />}
                                     />
                                 </div>
-                                <Input placeholder="https://google.com/your/link/here" className="placeholder:text-gray-400 placeholder:font-light placeholder:tracking-wide" />
+                                <Input onChange={(e)=>setData({...data , url: e.target.value})} placeholder="https://google.com/your/link/here" className="placeholder:text-gray-400 placeholder:font-light placeholder:tracking-wide" />
                             </div>
                             
                         </div>
@@ -41,7 +44,7 @@ export function useCreateLinkModal() {
                 </div>
                 <div className="flex flex-col justify-between w-full h-full">
                     <div className="w-full flex flex-col h-full overflow-auto">
-                        <div className="border-b bg-white px-5 py-9 text-center flex items-center justify-center gap-2 h-fit sticky top-0 lg:static rounded-l-lg">
+                        <div className="border-b bg-white px-5 py-9 text-center flex items-center justify-center gap-2 h-fit sticky top-0 lg:static rounded-tl-lg rounded-b-none">
                             <p>Social Preview</p>
                         </div>
                         <div className=" h-full overflow-auto flex flex-col gap-4 scrollbar-hide px-12 py-8 bg-gray-50">
