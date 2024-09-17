@@ -14,13 +14,15 @@
     "next": "14.2.6",
     "next-auth": "^4.24.7",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@club/db": "*",
     "@club/tailwind-config": "*",
     "@club/typescript-config": "*",
     "@club/ui": "*",
+    "@club/utils": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
