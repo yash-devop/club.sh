@@ -3,6 +3,8 @@ import { Button } from "./button"
 import {
     Dialog,
     DialogContent,
+    DialogHeader,
+    DialogTitle,
     DialogTrigger,
 } from "./dialog"
 
@@ -28,10 +30,12 @@ export function Modal({
                 }
             }}
         >
+            {/* <DialogHeader>HELLo</DialogHeader> */}
+            <DialogTitle className="hidden"></DialogTitle>
             {/* <DialogTrigger asChild>
                 <Button variant="outline">Edit Profile</Button>
             </DialogTrigger> */}
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="max-w-5xl max-h-[800px] h-full p-0 backdrop-blur-2xl">
                 {children}
             </DialogContent>
         </Dialog>
