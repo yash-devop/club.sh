@@ -1,6 +1,6 @@
-export interface LinkProps {
+export interface CreateLinkProps {
     url: string,
-    shortCode: string
+    shortCode?: string
 }
 
-export type CreateLinkProps = Pick<LinkProps , "url">
+// export type CreateLinkProps = Pick<LinkProps , "url">
