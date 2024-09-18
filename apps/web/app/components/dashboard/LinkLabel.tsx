@@ -38,7 +38,7 @@ export default function LinkLabel({
                         <>
                             <div>
                                 <Tooltip>
-                                    <TooltipTrigger className="text-slate-700 flex items-center">
+                                    <TooltipTrigger className="text-slate-700 flex items-center pr-2">
                                         {additional}
                                     </TooltipTrigger>
                                     {
