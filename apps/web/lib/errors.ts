@@ -27,20 +27,27 @@ const errorCodeToHttpStatus: Record<z.infer<typeof ErrorCode>, number> = {
 export class ClubApiError extends Error {
     public readonly errorName: z.infer<typeof ErrorCode>;
     public readonly code: number
+    public readonly inputField?: {
+        [key: string]: string
+    }
 
     constructor({
         errorName,
         message,
-        code
+        code,
+        inputField
     }: {
         errorName: z.infer<typeof ErrorCode>,
         message: string,
-        code: number
+        code: number,
+        inputField?: {
+            [key: string]: string
+        }
     }) {
         super(message)
         this.errorName = errorName
         this.code = code
-
+        this.inputField = inputField;
         // Maintain proper stack trace 
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, ClubApiError);
