@@ -22,7 +22,7 @@ export default function LinkLabel({
                 <div className="space-x-2 flex items-center">
                     <Label className="text-slate-700">{label}</Label>
                     <Tooltip>
-                        <TooltipTrigger className="text-gray-400">
+                        <TooltipTrigger asChild className="text-gray-400">
                             {logo}
                         </TooltipTrigger>
                         <TooltipContent align="center" className="z-[1000]">
@@ -38,7 +38,8 @@ export default function LinkLabel({
                         <>
                             <div>
                                 <Tooltip>
-                                    <TooltipTrigger className="text-slate-700 flex items-center pr-2">
+                                    {/* by default shadcn radix ui renders ToolTip trigger as a button... soo it will work as a button...that's why it was causing the weird form submit from create modal component.  */}
+                                    <TooltipTrigger asChild className="text-slate-700 flex items-center mr-2">      
                                         {additional}
                                     </TooltipTrigger>
                                     {
