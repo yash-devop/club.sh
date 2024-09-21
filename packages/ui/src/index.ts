@@ -7,4 +7,7 @@ export * from "./components/ui/tooltip"
 export * from "./components/ui/modal"
 export * from "./icons/Google"
 export * from "./icons/Github"
+export * from "./icons/LinkedIn"
+export * from "./icons/Twitter"
+export * from "./icons/Facebook"
 export * from './lib/utils'
