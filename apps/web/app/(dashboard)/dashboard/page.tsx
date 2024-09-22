@@ -18,25 +18,29 @@ import {
 } from '@club/ui'
 
 import {LogOut} from 'lucide-react'
-export default function DashboardPage() {
+import { getServerSession } from "next-auth"
+export default async function DashboardPage() {
+
+    const session = await getServerSession()
     return (
         <>
             <div className="w-full min-h-screen bg-gray-50 ">
-                <div className="">
+                <div className="bg-white">
                     <MaxWidthContainer className="flex items-center justify-between gap-3 p-5 ">
                         <p className="text-xl md:text-2xl font-semibold tracking-[-2px]">club.url </p>
 
                         <DropdownMenu>
                             <DropdownMenuTrigger>
                                 <Avatar>
-                                    <AvatarImage src="https://github.com/shadcn.png" />
+                                    {/* https://github.com/shadcn.png */}
+                                    <AvatarImage src={session?.user?.image!} />
                                     <AvatarFallback className="bg-slate-300">CN</AvatarFallback>
                                 </Avatar>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="px-2 py-3 min-w-0">
                                 <DropdownMenuLabel className="min-w-0">
                                     <span>My Account</span>
-                                    <p className="truncate text-slate-500 font-light text-sm cursor-pointer hover:text-black">kamble1234meena@gmail.com</p>
+                                    <p className="truncate text-slate-500 font-light text-sm cursor-pointer hover:text-black">{session?.user?.email }</p>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem className="gap-2">
