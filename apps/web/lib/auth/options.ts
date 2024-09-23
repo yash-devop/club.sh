@@ -13,7 +13,8 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
         GoogleProvider({
             clientId: GOOGLE_ID,
             clientSecret: GOOGLE_SECRET,
-            allowDangerousEmailAccountLinking: true
+            allowDangerousEmailAccountLinking: true,
+            authorization: `https://accounts.google.com/o/oauth2/auth/authorize?response_type=code&prompt=login`
         })
     ],
     session: {
