@@ -69,6 +69,7 @@ model Link {
   shortCode   String    @unique
   title       String?
   description String?   @db.VarChar(280)
+  image       String?
   expiresAt   DateTime?
   createdAt   DateTime?
   updatedAt   DateTime?
