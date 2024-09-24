@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@club/ui";
 import { Globe } from "lucide-react";
 import Image, { ImageProps } from "next/image";
