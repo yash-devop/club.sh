@@ -1,5 +1,5 @@
 import { CreateLinkProps } from "@/lib/types"
-import { cn, Facebook, LinkedIn, Twitter } from "@club/ui"
+import { cn, Facebook, LinkedIn, SkeletonBar, Twitter } from "@club/ui"
 import { Image as Gallery, Loader2 } from "lucide-react"
 import Image from 'next/image'
 
@@ -8,17 +8,6 @@ const Loader = () => {
 }
 
 
-const SkeletonBar = ({
-    className
-}: {
-    className?: string
-}) => {
-    return (
-        <>
-            <div className={cn(`py-2 rounded-full w-full bg-gray-200`, className)} />
-        </>
-    )
-}
 const PreviewHeader = ({
     name,
     logo
