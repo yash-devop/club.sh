@@ -6,10 +6,13 @@ import Image, { ImageProps } from "next/image";
 import { useEffect, useState } from "react";
 
 export default function LinkLogo({
+    containerSize ,
     className,
     alt,
     ...props
-}: ImageProps) {
+}: {
+    containerSize?:string
+} & ImageProps) {
     const [error, setError] = useState(false)
     const [errorUrl , setErrorUrl] = useState("")
     const [src, setSrc] = useState(props.src)
@@ -36,7 +39,7 @@ export default function LinkLogo({
     }
     return isValidUrl(props.src as string) ? (
         <>
-            <div className="size-10 flex items-center">
+            <div className={cn(`size-10 flex items-center justify-center`,containerSize)}>
                 <Image
                     {...props}
                     src={`${error ? errorUrl : `https://www.google.com/s2/favicons?sz=64&domain_url=${props.src}`}`}
@@ -48,7 +51,7 @@ export default function LinkLogo({
                         setError(true)
                         setErrorUrl(`https://avatar.vercel.sh/${encodeURIComponent(alt)}`)
                     }}
-                    className={cn("h-8 w-8 rounded-full sm:h-10 sm:w-10 object-contain", className)}
+                    className={cn("h-8 w-8 rounded-full sm:h-7 sm:w-7 object-contain", className)}
                     draggable={false}
                     unoptimized
                 />
