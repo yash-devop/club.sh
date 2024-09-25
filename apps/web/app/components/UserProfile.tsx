@@ -1,5 +1,3 @@
-"use client"
-
 import { Logout } from "@/app/components/Logout"
 import {
     DropdownMenu,
@@ -9,22 +7,21 @@ import {
     DropdownMenuTrigger
 } from '@club/ui'
 import { getInitialsCharacters } from "@club/utils"
-
-import { useSession } from "next-auth/react"
+import { getServerSession, Session } from "next-auth"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 
 
 
-export default function UserProfile() {
-    const session = useSession();
-
+export default async function UserProfile({
+    session
+}:{
+    session: Session | null
+}) {
     if (!session) {
         return redirect("/signin");
     }
-
-    const user = session.data?.user;
-    console.log('userrr', user);
+    const user = session?.user;
     const userImage = user?.image;
     const userName = user?.name || "Anonymous";
     const userEmail = user?.email || "No email available";
