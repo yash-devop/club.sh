@@ -126,7 +126,7 @@ function CreateLinkModalCallback({
                 <form onSubmit={handleSubmit(handleCreateLink)} className="flex flex-col justify-between w-full h-full">
                     <div className="w-full flex flex-col h-full overflow-auto">
                         <div className="border-b bg-white px-5 py-7 text-center flex items-center justify-center gap-3 h-fit  rounded-tl-lg sticky top-0 lg:static text-slate-800 text-lg">
-                            <LinkLogo alt="new link" src={debouncedUrl} />
+                            <LinkLogo className="sm:h-10 sm:w-10" alt="new link" src={debouncedUrl} />
                             <p className="font-semibold p-2">Create a new link</p>
                         </div>
                         <div className=" h-full overflow-auto flex flex-col gap-7 scrollbar-hide px-12 py-8 bg-gray-50 rounded-bl-lg">
