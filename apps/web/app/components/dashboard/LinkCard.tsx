@@ -1,6 +1,7 @@
 "use client"
 
 import { Copy, CornerDownRight, EllipsisVertical } from "lucide-react";
+import {formatDistanceToNow} from 'date-fns'
 import {
     cn,
     DropdownMenu,
@@ -17,17 +18,20 @@ export default function LinkCard({
     url,
     shortCode,
     isPending,
-    user
+    user,
+    createdAt
 }: {
     url: string,
     shortCode: string,
     isPending: boolean,
+    createdAt: Date | null,
     user:{
         image: string | null
     }
 }) {
 
     const textRef = useRef(null);
+
 
     return (
         <>
@@ -52,10 +56,13 @@ export default function LinkCard({
                                 </div>
                                 <div className="flex items-center gap-3 text-slate-500">
                                     {
-                                        <Image src={user.image!} alt="user-image" width={16} height={16} className="rounded-full" unoptimized/>
+                                        <Image src={user.image!} alt="user-image" width={16} height={16} className="rounded-full hidden sm:block" />
                                     }
                                     {/* <div className="w-4 h-4 rounded-full bg-slate-300 shrink-0 hidden md:block"></div> */}
-                                    <span className="text-xs hidden lg:block">Sep 2</span>
+                                    <span className="text-xs hidden lg:block">{formatDistanceToNow(createdAt!,{
+                                        addSuffix: true,
+                                        includeSeconds: true,
+                                    })}</span>
                                 </div>
                             </div>
                         </div>
