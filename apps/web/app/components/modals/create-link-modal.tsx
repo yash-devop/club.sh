@@ -19,10 +19,12 @@ type CreateLinkSchemaType = z.infer<typeof createLinkSchema>
 
 function CreateLinkModalCallback({
     showCreateLinkModal,
-    setShowCreateLinkModal
+    setShowCreateLinkModal,
+    invalidateLinks
 }: {
     showCreateLinkModal: boolean,
-    setShowCreateLinkModal: React.Dispatch<React.SetStateAction<boolean>>
+    setShowCreateLinkModal: React.Dispatch<React.SetStateAction<boolean>>,
+    invalidateLinks: ()=>void
 }) {
     const { register, handleSubmit, formState: {
         errors,
@@ -73,7 +75,8 @@ function CreateLinkModalCallback({
                 }
             },
             onSuccess: (data)=>{
-                setShowCreateLinkModal(false)
+                setShowCreateLinkModal(false);
+                invalidateLinks()
             }
         })
     }
@@ -210,10 +213,15 @@ function CreateLinkModalCallback({
 export function useCreateLinkModal() {
     const [showCreateLinkModal, setShowCreateLinkModal] = useState<boolean>(false);
 
-    const CreateModalCallback = useCallback(() => (       // return
+    const CreateModalCallback = useCallback(({
+        invalidateLinks
+    }:{
+        invalidateLinks: ()=>void
+    }) => (       // return
         <CreateLinkModalCallback
             showCreateLinkModal={showCreateLinkModal}
             setShowCreateLinkModal={setShowCreateLinkModal}
+            invalidateLinks={invalidateLinks}
         />
     ), [showCreateLinkModal, setShowCreateLinkModal])
 
