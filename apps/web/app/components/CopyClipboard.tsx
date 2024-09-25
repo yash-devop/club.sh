@@ -34,7 +34,7 @@ const CopyClipboard = ({
     return (
         <>
             {
-                isCopying ? <Check size={15} className="text-slate-400" /> : <Copy onClick={handleCopy} size={15} className="text-slate-400 cursor-pointer" />
+                isCopying ? <Check size={13} className="text-slate-700" /> : <Copy onClick={handleCopy} size={13} className="text-slate-700 cursor-pointer" />
             }
         </>
     );
