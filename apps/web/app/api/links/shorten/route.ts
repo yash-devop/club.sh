@@ -10,10 +10,13 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     if (!session?.user) {
         return new Response("Unauthorized Access. Please login", { status: 401 });
     }
-    const { url ,shortCode }: CreateLinkProps = await req.json();
+    const { url ,shortCode , title,description,image }: CreateLinkProps = await req.json();
     console.log({
         url,
-        shortCode
+        shortCode,
+        title,
+        description,
+        image
     });
     try {
         if (!url) {
@@ -52,7 +55,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                 data: {
                     url,
                     shortCode: truncatedStr,
-                    userId: session.user.id
+                    userId: session.user.id,
+                    title,
+                    description,
+                    image
                 },
             })
     
@@ -97,8 +103,15 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     url,
                     shortCode,
                     userId: session.user.id,
+                    title,
+                    description,
+                    image
                 },
+                select:{
+                    createdAt: true
+                }
             })
+            console.log('new link created :' , newLink);
     
             if (!newLink) {
                 throw new ClubApiError({
