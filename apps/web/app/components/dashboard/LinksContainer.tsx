@@ -4,7 +4,24 @@ import LinkCard from "./LinkCard";
 import { fetcher } from "@club/utils";
 import { SkeletonBar } from "@club/ui";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
+
+interface Link {
+    id: string;
+    url: string;
+    shortCode: string;
+    title: string | null;
+    description: string | null;
+    image: string | null;
+    expiresAt: Date | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    user: {
+        image: string | null;
+    };
+}
 // do api calls here using server actions or normal SSR api call ( can also use React Query for better api calling and caching calls. ).
 const NotFoundImage = ({
     className
@@ -98,8 +115,8 @@ const LinkSkeleton = ({
             {
                 Array.from({
                     length
-                }).map((_) => (
-                    <div className="bg-white border rounded-xl animate-pulse">
+                }).map((_, idx) => (
+                    <div key={idx} className="bg-white border rounded-xl animate-pulse">
                         <div className="flex items-center gap-5 p-4">
                             <SkeletonBar className="rounded-full size-12 p-2.5 items-center bg-gray-100" />
                             <div className="flex items-center justify-between gap min-w-0 w-full">
@@ -129,24 +146,13 @@ const LinkSkeleton = ({
     )
 }
 export default function LinksContainer() {
+    const searchParam = useSearchParams()
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const { data: links, isPending } = useQuery<
-        {
-            id: string;
-            url: string;
-            shortCode: string;
-            title: string | null;
-            description: string | null;
-            image: string | null;
-            expiresAt: Date | null;
-            createdAt: Date | null;
-            updatedAt: Date | null;
-            user: {
-                image: string | null;
-            }
-        }[]
-    >({
-        queryKey: ['links'],
+    const { data: UserData } = useSession()
+    //@ts-ignore
+    const userId = UserData?.user?.id as string;
+    const { data: links, isPending } = useQuery<Link[]>({
+        queryKey: ['links', userId],
         queryFn: () => {
             return fetcher({
                 input: '/api/links',
@@ -155,9 +161,24 @@ export default function LinksContainer() {
                     headers: {
                         'Content-Type': 'application/json',
                     }
-                }})
+                }
+            })
         },
         refetchOnWindowFocus: false,
+        enabled: !!userId,
+        select: (data) => {
+            if (searchParam.get("search")) {
+                const searchQuery = searchParam.get("search")?.toLowerCase()
+                return data.filter((link) =>
+                    link.title?.toLowerCase().includes(searchQuery!) ||
+                    link.url?.toLowerCase().includes(searchQuery!) ||
+                    link.shortCode?.toLowerCase().includes(searchQuery!)
+                );
+            }
+            else {
+                return data;
+            }
+        }
     });
 
 
@@ -176,12 +197,19 @@ export default function LinksContainer() {
                 <LinkSkeleton length={5} />
             ) : (
                 <div
-                    className={`flex flex-col gap-4 ${isTransitioning ? 'blur-[1px] transition-opacity' : 'blur-0'
-                        } transition-all duration-200`}
+                    className={`flex flex-col gap-4 ${isTransitioning ? 'blur-[1px] transition-opacity' : 'blur-0'} transition-all duration-200`}
                 >
                     {links && links.length > 0 ? (
-                        links.map(({ title, image, url, shortCode , user , createdAt }) => (
-                            <LinkCard key={shortCode} url={url} shortCode={shortCode} isPending={isPending} user={user}/>
+                        links.map(({ title, image, url, shortCode, user, createdAt }) => (
+                            <div key={shortCode}>
+                                <LinkCard
+                                    url={url}
+                                    shortCode={shortCode}
+                                    isPending={isPending}
+                                    user={user}
+                                    createdAt={createdAt}
+                                />
+                            </div>
                         ))
                     ) : (
                         <LinksNotFound />
