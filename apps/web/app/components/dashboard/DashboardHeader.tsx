@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import {cn} from '@club/ui'
 const DashboardHeader = () => {
-    const pathname = "/dashboard"; // Mocked value; use `usePathname()` for actual path
+    const pathname = usePathname(); 
     const router = useRouter();
     const [highlightStyle, setHighlightStyle] = useState({ width: 0, left: 0 }); 
     const navRef = useRef<HTMLDivElement | null>(null); 
