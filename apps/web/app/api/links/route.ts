@@ -25,6 +25,9 @@ export const GET = async () => {
                         image: true
                     }
                 }
+            },
+            orderBy:{
+                createdAt: "desc"
             }
         })
 
