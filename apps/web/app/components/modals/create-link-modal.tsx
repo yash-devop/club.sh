@@ -216,12 +216,12 @@ export function useCreateLinkModal() {
     const CreateModalCallback = useCallback(({
         invalidateLinks
     }:{
-        invalidateLinks: ()=>void
+        invalidateLinks?: ()=>void
     }) => (       // return
         <CreateLinkModalCallback
             showCreateLinkModal={showCreateLinkModal}
             setShowCreateLinkModal={setShowCreateLinkModal}
-            invalidateLinks={invalidateLinks}
+            invalidateLinks={invalidateLinks!}
         />
     ), [showCreateLinkModal, setShowCreateLinkModal])
 
