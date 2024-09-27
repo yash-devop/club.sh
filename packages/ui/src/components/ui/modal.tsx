@@ -1,4 +1,5 @@
 "use client"
+import { cn } from "@club/ui/lib/utils";
 import { Button } from "./button"
 import {
     Dialog,
@@ -10,10 +11,12 @@ import {
 
 
 export function Modal({
+    className,
     children,
     showModal,
     setShowModal
 }: {
+    className?:string,
     children: React.ReactNode,
     showModal: boolean,
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -35,7 +38,7 @@ export function Modal({
             {/* <DialogTrigger asChild>
                 <Button variant="outline">Edit Profile</Button>
             </DialogTrigger> */}
-            <DialogContent className="max-w-5xl max-h-[800px] h-full p-0 backdrop-blur-2xl">
+            <DialogContent className={cn(`max-w-5xl max-h-[800px] h-full p-0 backdrop-blur-2xl`,className)}>
                 {children}
             </DialogContent>
         </Dialog>
