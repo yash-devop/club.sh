@@ -152,7 +152,7 @@ export default function LinksContainer() {
     //@ts-ignore
     const userId = UserData?.user?.id as string;
     const { data: links, isPending } = useQuery<Link[]>({
-        queryKey: ['links', userId],
+        queryKey: ['links'],
         queryFn: () => {
             return fetcher({
                 input: '/api/links',
