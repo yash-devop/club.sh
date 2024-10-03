@@ -1,12 +1,10 @@
 import { NextRequest } from "next/server"
 import UAParser from "ua-parser-js"
 
-
 type UserType = "browser" | "cpu" | "device" | "os"
 
 type unknownValue = "unknown"
 
-// const apps = ["whatsapp", "twitterbot", "linkedinbot", "dub.co bot"]
 const botAppRegex = /(\w+(?:bot|app|fetch|spider|crawl))/gi
 export const getUserAgent = (req: NextRequest["headers"], type: UserType): unknownValue | string => {
 
@@ -19,8 +17,6 @@ export const getUserAgent = (req: NextRequest["headers"], type: UserType): unkno
 
     if (type === "browser") {
         const match = userAgent.match(botAppRegex);
-        console.log('match:', match);
-
         if (match) {
             return match[0]; // Return the matched bot/app name
         }
