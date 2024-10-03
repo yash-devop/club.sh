@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getShortCode } from '@club/utils'
+import { getShortCode, getUserAgent, LOCALHOST_GEO_DATA } from '@club/utils'
 
 import { CreateLinkProps } from '@/lib/types'
 import prisma from "@club/db/client";
 import { ClubApiError, PrismaErrorHandler } from "@/lib/errors";
 import { getSessionFn } from "@/lib/auth/getSession";
+import { getGeoData } from "@/lib/functions/getGeoData";
+
+
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const session = await getSessionFn()
     if (!session?.user) {
@@ -108,6 +111,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     image
                 },
                 select:{
+                    id: true,
                     createdAt: true
                 }
             })
@@ -123,6 +127,13 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
                     }
                 })
             }
+            const { country, region } = process.env.NODE_ENV === "development" ? LOCALHOST_GEO_DATA : await getGeoData("103.111.231.188");
+            const browser = getUserAgent(req.headers,"browser");
+            const device = getUserAgent(req.headers,"device");
+            const os = getUserAgent(req.headers,"os");
+    
+            const referrer = req.headers.get("referrer") ?? "direct"
+
             return NextResponse.json({
                 message: "Shorten Link Created",
                 link: newLink
