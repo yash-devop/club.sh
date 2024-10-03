@@ -6,7 +6,9 @@ type UserType = "browser" | "cpu" | "device" | "os"
 
 type unknownValue = "unknown"
 
-export const getUserAgent = (req: NextRequest["headers"], type: UserType): unknownValue | string  => {
+// const apps = ["whatsapp", "twitterbot", "linkedinbot", "dub.co bot"]
+const botAppRegex = /(\w+(?:bot|app|fetch|spider|crawl))/gi
+export const getUserAgent = (req: NextRequest["headers"], type: UserType): unknownValue | string => {
 
     const userAgent = req.get("user-agent");
 
@@ -16,7 +18,15 @@ export const getUserAgent = (req: NextRequest["headers"], type: UserType): unkno
     const parser = new UAParser(userAgent)
 
     if (type === "browser") {
-        return parser.getBrowser().name ?? "Unknown";
+        const match = userAgent.match(botAppRegex);
+        console.log('match:', match);
+
+        if (match) {
+            return match[0]; // Return the matched bot/app name
+        }
+        else {
+            return parser.getBrowser().name ?? "Unknown";
+        }
     }
     if (type === "cpu") {
         return parser.getCPU().architecture ?? "Unknown";
