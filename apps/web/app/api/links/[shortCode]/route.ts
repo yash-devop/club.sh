@@ -1,3 +1,4 @@
+import { getSessionFn } from "@/lib/auth/getSession";
 import { ClubApiError } from "@/lib/errors";
 import { getGeoData } from "@/lib/functions/getGeoData";
 import { publishClickEvents } from "@/lib/tinybird/publish";
@@ -38,6 +39,11 @@ export const GET = async (req: NextRequest, {
                 message: "The shorturl not found in database. Please check your URL correctly."
             })
         }
+
+        const session = await getSessionFn()
+        if (!session?.user) {
+            return new Response("Unauthorized Access. Please login", { status: 401 });
+        }
         const { id: urlId, url, title, description, image } = existingShortCode
         console.log('Original URL : ', existingShortCode);
 
@@ -56,19 +62,26 @@ export const GET = async (req: NextRequest, {
             referrer
         });
 
-        const published = await publishClickEvents({
-            browser,
-            device,
-            country,
-            os,
-            referrer,
-            url: existingShortCode.url,
-            timestamp: new Date().toISOString(),
-            click_id: nanoid(16),
-            link_id: urlId
-        })
-
-        console.log('published :', published);
+        try {
+            const published = await publishClickEvents({
+                browser,
+                device,
+                country,
+                os,
+                referrer,
+                url: existingShortCode.url,
+                shortCode,
+                //@ts-ignore
+                user_id: session?.user?.id,
+                timestamp: new Date().toISOString(),
+                click_id: nanoid(16),
+                link_id: urlId
+            })
+    
+            console.log('published :', published);
+        } catch (error) {
+            console.log('Tinybird error :' ,error);
+        }
 
         return NextResponse.json({
             url,
