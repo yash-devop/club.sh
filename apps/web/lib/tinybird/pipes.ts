@@ -51,3 +51,13 @@ export const getOSTB = tb.buildPipe({
         clicks: z.number()
     })
 })
+export const getLinkClicksTB = tb.buildPipe({
+    pipe: "club_sh_clicks",
+    parameters: z.object({
+        user_id: z.string()
+    }),
+    data: z.object({
+        url: z.string(),
+        clicks: z.number()
+    })
+})
