@@ -17,6 +17,7 @@ export const GET = async () => {
                 }
             },
             select: {
+                id: true,
                 url: true,
                 shortCode: true,
                 createdAt: true,
@@ -51,3 +52,32 @@ export const GET = async () => {
 
 }
 
+
+
+export const DELETE=async(req:NextRequest)=>{
+    const linkId = req.nextUrl.searchParams.get("linkId")
+
+    console.log('link id:', linkId);
+
+    if(!linkId){
+        return NextResponse.json({
+            message: "LinkID not found !"
+        })
+    }
+
+    try {
+        const link = await prisma.link.delete({
+            where: {
+                id: linkId
+            }
+        })
+    
+        return NextResponse.json({
+            message: `Link ${linkId} deleted successfully.`
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message: (error as Error).message
+        })
+    }
+}
