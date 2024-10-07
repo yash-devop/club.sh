@@ -41,10 +41,12 @@ function DeleteModalCallback({
                     "Content-Type": "application/json"
                 }
             }
+        },{
+            onSuccess: ()=>{
+                setShowDeleteModal(false)
+            }
         })
-        // setShowDeleteModal(false)
     }
-    console.log('link props :', linkProps);
     return (
         <Modal
             showModal={showDeleteModal}
