@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest, {
     try {
         const existingShortCode = await prisma.link.findUnique({
             where: {
-                shortCode
+                shortCode,
             },
             select: {
                 id: true,
@@ -29,7 +29,8 @@ export const GET = async (req: NextRequest, {
                 title: true,
                 description: true,
                 image: true,
-                userId: true
+                userId: true,
+                clicks: true
             }
         })
         if (!existingShortCode) {
@@ -67,6 +68,7 @@ export const GET = async (req: NextRequest, {
                 referrer,
                 url: existingShortCode.url,
                 shortCode,
+                urlClicks: existingShortCode.clicks,
                 //@ts-ignore
                 user_id: existingShortCode.userId,
                 timestamp: new Date().toISOString(),
