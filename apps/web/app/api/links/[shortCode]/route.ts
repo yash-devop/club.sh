@@ -28,7 +28,8 @@ export const GET = async (req: NextRequest, {
                 url: true,
                 title: true,
                 description: true,
-                image: true
+                image: true,
+                userId: true
             }
         })
         if (!existingShortCode) {
@@ -38,11 +39,6 @@ export const GET = async (req: NextRequest, {
                 code: 404,
                 message: "The shorturl not found in database. Please check your URL correctly."
             })
-        }
-
-        const session = await getSessionFn()
-        if (!session?.user) {
-            return new Response("Unauthorized Access. Please login", { status: 401 });
         }
         const { id: urlId, url, title, description, image } = existingShortCode
         console.log('Original URL : ', existingShortCode);
@@ -72,7 +68,7 @@ export const GET = async (req: NextRequest, {
                 url: existingShortCode.url,
                 shortCode,
                 //@ts-ignore
-                user_id: session?.user?.id,
+                user_id: existingShortCode.userId,
                 timestamp: new Date().toISOString(),
                 click_id: nanoid(16),
                 link_id: urlId
