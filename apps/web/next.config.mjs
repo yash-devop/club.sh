@@ -13,10 +13,16 @@ const nextConfig = {
           hostname: "s2.googleusercontent.com"
         },
         {
+          hostname: "lh3.googleusercontent.com"
+        },
+        {
           hostname: "www.google.com"
         },
         {
           hostname:"picsum.photos"    // im using this for testing images ( for UI only)
+        },
+        {
+          hostname:"avatar.vercel.sh"
         },
         {
           hostname: "pbs.twimg.com"
