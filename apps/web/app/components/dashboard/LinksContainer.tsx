@@ -6,6 +6,7 @@ import { SkeletonBar } from "@club/ui";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import React from "react";
 
 
 interface Link {
@@ -200,9 +201,10 @@ export default function LinksContainer() {
                     className={`flex flex-col gap-4 ${isTransitioning ? 'blur-[1px] transition-opacity' : 'blur-0'} transition-all duration-200`}
                 >
                     {links && links.length > 0 ? (
-                        links.map(({ title, image, url, shortCode, user, createdAt }) => (
-                            <div key={shortCode}>
+                        links.map(({ id, title, image, url, shortCode, user, createdAt }) => (
+                            <div key={id}>
                                 <LinkCard
+                                    linkId={id}
                                     url={url}
                                     shortCode={shortCode}
                                     isPending={isPending}
