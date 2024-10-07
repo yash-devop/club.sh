@@ -18,12 +18,14 @@ import { useEffect, useRef, useState } from "react";
 import { useQrModal } from "../modals/qr-modal";
 import { useDeleteModal } from "../modals/delete-link-modal";
 export default function LinkCard({
+    linkId,
     url,
     shortCode,
     isPending,
     user,
     createdAt
 }: {
+    linkId: string,
     url: string,
     shortCode: string,
     isPending: boolean,
@@ -45,6 +47,8 @@ export default function LinkCard({
         }
     }, [isPending]);
 
+
+    console.log('linkId in card: ', linkId);
     return (
         <>
             <div className={`bg-white border rounded-xl hover:shadow-2xl hover:shadow-gray-200 transition-all ${cn(isPending ? "blur-[102px]" : "blur-0")}`}>
@@ -100,10 +104,14 @@ export default function LinkCard({
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
-                            <QRCallback />
-                            <DeleteCallback linkProps={{
+                            <QRCallback linkProps={{
                                 shortCode,
                                 url
+                            }}/>
+                            <DeleteCallback linkProps={{
+                                shortCode,
+                                url,
+                                linkId
                             }}/>
                         </div>
                     </div>
