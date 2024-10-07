@@ -6,6 +6,7 @@ import { fetcher, getUrlwithoutWWW } from "@club/utils";
 import { useMutation } from "@tanstack/react-query";
 
 type LinkProps = {
+    linkId: string,
     url: string,
     shortCode: string
 }
@@ -21,7 +22,7 @@ function DeleteModalCallback({
 }) {
 
     if (!linkProps) return;
-    const { shortCode, url } = linkProps
+    const { shortCode, url , linkId } = linkProps
     const environmentBasedURL = `${process.env.NODE_ENV === "development" ? "localhost:3000" : "club.sh"}/${shortCode}`
     // const {setShowDeleteModal} = useDeleteModal()
     const { isPending, mutate, error } = useMutation({
@@ -33,9 +34,9 @@ function DeleteModalCallback({
         console.log('Succesfull.');
 
         mutate({
-            input: `/api/links/jod?userId=${123456}`,
+            input: `/api/links?linkId=${linkProps.linkId}`,
             init: {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
                 }
