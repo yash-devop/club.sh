@@ -4,18 +4,28 @@ import { Modal } from "@club/ui";
 import LinkLogo from "../dashboard/LinkLogo";
 import QRCode from "qrcode";
 
+type LinkProps = {
+    url: string,
+    shortCode: string
+}
+
 function QRModalCallback({
     showQRModal,
     setShowQRModal,
+    linkProps
 }: {
     showQRModal: boolean;
     setShowQRModal: React.Dispatch<React.SetStateAction<boolean>>;
+    linkProps?: LinkProps
 }) {
+    if (!linkProps) return;
+    const { shortCode, url } = linkProps
+
     const [src, setSrc] = useState<string>("");
 
     const generateQRCodeWithLogo = async () => {
         try {
-            const qrDataUrl = await QRCode.toDataURL("https://github.com/shadcn");
+            const qrDataUrl = await QRCode.toDataURL(url);
 
             // Code to attach the loogo to center of the the QRCode
             const canvas = document.createElement("canvas");
@@ -23,7 +33,7 @@ function QRModalCallback({
 
             const qrImage = new Image();
             const logoImage = new Image();
-            
+
             qrImage.src = qrDataUrl;
             logoImage.src = "https://avatars.githubusercontent.com/u/124599?v=4";
 
@@ -32,11 +42,11 @@ function QRModalCallback({
                 canvas.height = qrImage.height;
 
                 // below is the code for : drawing the qrcode
-                if(!ctx) return
+                if (!ctx) return
                 ctx.drawImage(qrImage, 0, 0);
                 logoImage.crossOrigin = "anonymous";        // this is required so that , we can import any url and create qrcode from it else it will throw tainted error. ( google it )
                 logoImage.onload = () => {                  // when the img will load , attach logo to it by using canvas "drawImage" method.
-                    const logoSize = qrImage.width / 5;            
+                    const logoSize = qrImage.width / 5;
                     const logoX = (qrImage.width - logoSize) / 2;
                     const logoY = (qrImage.height - logoSize) / 2;
 
@@ -79,12 +89,12 @@ function QRModalCallback({
             <div className="flex flex-col items-center gap-10">
                 <div className="px-5 py-7 bg-white border-b flex flex-col items-center justify-center w-full h-fit rounded-tr-md rounded-tl-md">
                     <div className="border rounded-full size-12 p-2 items-center bg-gradient-to-t from-gray-100 flex shrink-0">
-                        <LinkLogo src={"https://youtube.com/"} alt="link-logo" />
+                        <LinkLogo src={url} alt="link-logo" />
                     </div>
                     <p>Download QR Code</p>
                 </div>
                 <div className="p border rounded-md w-fit h-fit">
-                    {src && <img src={src} alt="QR Code" className="w-[240px]"/>}
+                    {src && <img src={src} alt="QR Code" className="w-[240px]" />}
                 </div>
                 <button
                     onClick={handleDownload}
@@ -103,10 +113,15 @@ export function useQrModal() {
     const [showQRModal, setShowQRModal] = useState<boolean>(false);
 
     const QRCallback = useCallback(
-        () => (
+        ({
+            linkProps
+        }: {
+            linkProps?: LinkProps
+        }) => (
             <QRModalCallback
                 showQRModal={showQRModal}
                 setShowQRModal={setShowQRModal}
+                linkProps={linkProps}
             />
         ),
         [showQRModal, setShowQRModal]
