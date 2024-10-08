@@ -172,7 +172,7 @@ function CreateLinkModalCallback({
                                         setValue("shortCode", e.target.value);  // Update form value
                                         setData({ ...data, shortCode: e.target.value });  // Update local state for input
                                     }}
-                                    placeholder="https://google.com/your/link/here" className="placeholder:text-gray-400 placeholder:font-light placeholder:tracking-wide" />
+                                    placeholder="Eg: xYz1234" className="placeholder:text-gray-400 placeholder:font-light placeholder:tracking-wide" />
                                 {errors.shortCode ? <p className="text-red-600 font-light text-sm">{JSON.stringify(errors.shortCode?.message)}</p> : null}
 
                             </div>
