@@ -24,7 +24,7 @@ export default function Bar({
             <div className=" flex items-center justify-between text-sm">
                 <div style={{
                     width: `${dynamicWidth}%`,
-                }} className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap`}>
+                }} className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap truncate`}>
                     <p>{name}</p>
                 </div>
                 <p className="pr-4">{clicks}</p>
