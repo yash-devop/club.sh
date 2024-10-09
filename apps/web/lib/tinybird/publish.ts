@@ -15,7 +15,7 @@ export const publishClickEvents = tb.buildIngestEndpoint({
         referrer: z.string(),
         user_id: z.string(),
         shortCode: z.string(),
-        urlClicks: z.number(),
+        urlClicks: z.string(),
         timestamp: z.string().refine((value) => isoDateTimeRegex.test(value), {
             message: "Invalid timestamp format. Must be in ISO 8601 format (e.g., 2024-10-03T12:34:56Z)",
         }),
