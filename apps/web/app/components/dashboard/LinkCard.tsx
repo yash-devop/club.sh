@@ -90,10 +90,10 @@ export default function LinkCard({
                                     </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="px-2 py-3 w-[140px]">
-                                    <DropdownMenuItem className="cursor-pointer justify-evenly text-slate-600">
+                                    {/* <DropdownMenuItem className="cursor-pointer justify-evenly text-slate-600">
                                         <PencilIcon size={15} />
                                         <p className="text-sm font-medium">Edit Link</p>
-                                    </DropdownMenuItem>
+                                    </DropdownMenuItem> */}
                                     <DropdownMenuItem onClick={()=>setShowQRModal(true)} className="cursor-pointer justify-evenly text-slate-600">
                                             <QrCode size={15} />
                                             <p className="text-sm font-medium ">QR Code</p>
