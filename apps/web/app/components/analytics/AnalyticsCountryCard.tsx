@@ -5,7 +5,7 @@ import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
 import { fetcher } from "@club/utils";
 import Bar from "./Bar";
-import {BarList} from "./BarList";
+import { BarList } from "./BarList";
 
 type CountryResponse = {
     countries: {
@@ -48,7 +48,6 @@ export function AnalyticsCountryCard<T extends string>({
         staleTime: 1000 * 300
     })
     const maxCount = countryData?.countries?.length ? Math.max(...countryData.countries.map((country) => country.clicks)) : 0;
-
     return (
         <div className="border bg-white min-h-[400px] max-h-[400px] w-full h-full rounded-xl overflow-auto relative">
             <div className="flex items-center justify-between border-b px-4 bg-white sticky top-0 right-0 left-0">
@@ -63,7 +62,14 @@ export function AnalyticsCountryCard<T extends string>({
                 </div>
             </div>
             <div className="flex flex-col px-5 py-4">
-                {activeTab?.id === "country" ? (
+
+                {isFetching ? (
+                    <>
+                        <div className="flex items-center justify-center w-full py-32 text-sm text-neutral-400 font-light">
+                            <p>Loading...</p>
+                        </div>
+                    </>
+                ) : activeTab?.id === "country" ? (
                     countryData && countryData.countries.length > 0 ? (
                         <BarList data={countryData.countries} countKey="clicks" maxCount={maxCount} nameKey="country" />
                     ) : (

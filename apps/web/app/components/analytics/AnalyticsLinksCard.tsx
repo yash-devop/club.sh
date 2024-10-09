@@ -48,17 +48,10 @@ export function AnalyticsLinksCard<T extends string>({
     })
     const maxCount = linksData?.links?.length ? Math.max(...linksData.links.map((link) => link.clicks)) : 0;
 
-    if (isFetching) {
-        return <h1>Loading...</h1>
-    }
     return (
         <div className="border bg-white min-h-[400px] max-h-[400px] w-full h-full rounded-xl overflow-auto relative">
             {
-                isFetching ? (
-                    <div>
-                        <h1>Loading...</h1>
-                    </div>
-                ) : (
+                (
                     <>
                         <div className="flex items-center justify-between border-b px-4 bg-white sticky top-0 right-0 left-0">
                             <Tabs
@@ -73,15 +66,22 @@ export function AnalyticsLinksCard<T extends string>({
                         </div>
                         <div className="flex flex-col px-5 py-4 overflow-auto">
                             {
-                                activeTab?.id === "links" ? (
-                                    linksData && linksData.links.length > 0 ? (
-                                        <BarList data={linksData.links} countKey="clicks" maxCount={maxCount} nameKey="url" />
-                                    ) : (
+                                isFetching ? (
+                                    <>
                                         <div className="flex items-center justify-center w-full py-32 text-sm text-neutral-400 font-light">
-                                            <p>No data available</p>
+                                            <p>Loading...</p>
                                         </div>
-                                    )
-                                ) : null
+                                    </>
+                                ) :
+                                    activeTab?.id === "links" ? (
+                                        linksData && linksData.links.length > 0 ? (
+                                            <BarList data={linksData.links} countKey="clicks" maxCount={maxCount} nameKey="url" />
+                                        ) : (
+                                            <div className="flex items-center justify-center w-full py-32 text-sm text-neutral-400 font-light">
+                                                <p>No data available</p>
+                                            </div>
+                                        )
+                                    ) : null
                             }
                         </div>
                     </>

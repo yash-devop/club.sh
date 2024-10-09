@@ -109,7 +109,13 @@ export function AnalyticsDevicesCard<T extends string>({
                 </div>
             </div>
             <div className="flex flex-col px-5 py-4">
-                {activeTab?.id === "devices" ? (
+                {isFetching ? (
+                    <>
+                        <div className="flex items-center justify-center w-full py-32 text-sm text-neutral-400 font-light">
+                            <p>Loading...</p>
+                        </div>
+                    </>
+                ) : activeTab?.id === "devices" ? (
                     deviceData && deviceData.devices.length > 0 ? (
                         <BarList data={deviceData.devices} countKey="clicks" maxCount={maxCount} nameKey="device" />
                     ) : (
