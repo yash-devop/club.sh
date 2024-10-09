@@ -68,7 +68,7 @@ export const GET = async (req: NextRequest, {
                 referrer,
                 url: existingShortCode.url,
                 shortCode,
-                urlClicks: existingShortCode.clicks,
+                urlClicks: String(existingShortCode.clicks),
                 //@ts-ignore
                 user_id: existingShortCode.userId,
                 timestamp: new Date().toISOString(),
