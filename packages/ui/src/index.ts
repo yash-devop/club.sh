@@ -21,4 +21,5 @@ export * from "./icons/Redis"
 export * from "./icons/Tailwind"
 export * from "./icons/Typescript"
 export * from "./icons/ReactQuery"
+export * from "./icons/Stackoverflow"
 export * from './lib/utils'
