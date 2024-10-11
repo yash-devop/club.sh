@@ -3,7 +3,7 @@ import { FormEvent, useCallback, useMemo, useState } from "react";
 import { Button, Input, Modal } from "@club/ui";
 import LinkLogo from "../dashboard/LinkLogo";
 import { fetcher, getUrlwithoutWWW } from "@club/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type LinkProps = {
     linkId: string,
@@ -29,6 +29,12 @@ function DeleteModalCallback({
         mutationFn: fetcher
     })
     // const urlWithoutWWW = getUrlwithoutWWW(environmentBasedURL)
+    const queryClient = useQueryClient();
+    const invalidateLinks = () => {
+        queryClient.invalidateQueries({
+            queryKey: ["links"]
+        });
+    }
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         console.log('Succesfull.');
@@ -44,6 +50,7 @@ function DeleteModalCallback({
         },{
             onSuccess: ()=>{
                 setShowDeleteModal(false)
+                invalidateLinks()
             }
         })
     }
@@ -69,8 +76,10 @@ function DeleteModalCallback({
                             <span className="text-sm font-light">To verify, type <span className="font-medium">{environmentBasedURL}</span> below</span>
                             <Input type="text" placeholder="" required pattern={environmentBasedURL} className="" />
                         </div>
-                        <Button type="submit" variant="destructive" size={"sm"} className="px-4 py-2">
-                            Confirm Delete
+                        <Button type="submit" variant="destructive" size={"sm"} className="px-4 py-2" disabled={isPending}>
+                            {
+                                isPending ? "Deleting..." : "Confirm Delete"
+                            }
                         </Button>
                     </form>
                 </div>
