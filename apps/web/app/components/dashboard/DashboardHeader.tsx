@@ -13,7 +13,7 @@ const DashboardHeader = () => {
     const navItems = [
         { name: 'Links', path: '/dashboard' },
         { name: 'Analytics', path: '/analytics' },
-        { name: 'Settings', path: '/settings' }
+        // { name: 'Settings', path: '/settings' }
     ];
 
     useEffect(() => {
