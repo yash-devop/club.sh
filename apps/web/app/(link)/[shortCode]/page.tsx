@@ -50,6 +50,7 @@ export default async function Page({
         headers: headers()
     });
     const data = await response.json()
+
     if (response.status === 404 || typeof data.url === "undefined") {
         notFound()
     }
