@@ -57,8 +57,6 @@ export const GET = async () => {
 export const DELETE = async (req: NextRequest) => {
     const linkId = req.nextUrl.searchParams.get("linkId")
 
-    console.log('link id:', linkId);
-
     if (!linkId) {
         return NextResponse.json({
             message: "LinkID not found !"
@@ -66,29 +64,24 @@ export const DELETE = async (req: NextRequest) => {
     }
 
     try {
-        // const link = await prisma.link.delete({
-        //     where: {
-        //         id: linkId
-        //     }
-        // })
-        // if (link) {
-        // }
-        const deleteCondition = `link_id = ${linkId}`;
-        // const deleteCondition = "toDate(date) >= '2019-11-01' and toDate(date) <= '2019-11-30'";
-        const response = await fetch("https://api.us-east.aws.tinybird.co/v0/datasources/club_click_events/delete", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${process.env.TINYBIRD_API_KEY}`
-            },
-            body: new URLSearchParams({
-                delete_condition: deleteCondition
-            })
+        const link = await prisma.link.delete({
+            where: {
+                id: linkId
+            }
         })
-
-        const result = await response.json()
-
-        console.log('Delete result from Tiny Bird: ', result);
-
+        if (link) {
+            const deleteCondition = `link_id = '${linkId}'`;
+            await fetch("https://api.us-east.aws.tinybird.co/v0/datasources/club_click_events/delete", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${process.env.TINYBIRD_API_KEY}`,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    delete_condition: deleteCondition
+                })
+            })
+        }
         return NextResponse.json({
             message: `Link ${linkId} deleted successfully.`
         })
