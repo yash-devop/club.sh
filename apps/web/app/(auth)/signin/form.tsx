@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, Github, Google, Input } from "@club/ui"
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useState } from "react"
 
 
@@ -41,9 +41,9 @@ export const LoginForm = () => {
                     </Button>
                 </div>
             </form>
-            {
+            {/* {
                 JSON.stringify(useSession().data)
-            }
+            } */}
         </>
     )
 }
