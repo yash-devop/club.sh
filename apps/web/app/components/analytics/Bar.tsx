@@ -30,10 +30,10 @@ export default function Bar({
     console.log('group: ', group);
     return (
         <>
-            <div className=" flex items-center justify-between text-sm">
+            <div className={`flex items-center justify-between text-sm w-full  gap-4`}>
                 <div style={{
                     width: `${dynamicWidth}%`,
-                }} className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap flex items-center gap-2`}>
+                }} className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap flex items-center gap-2 max-w-[430px]`}>
                     <div className="shrink-0">
                         {
                             group === "country" ? <img src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> : group === "referrer" ? <Link2 size={15} /> : group === "device" ? <LaptopMinimal size={15} /> : group === "browser" ? <Chrome size={15} /> : group === "os" && name === "Windows" ? <RiWindowsFill /> : group === "os"  ? <Shell size={15}/> : group === "url" ? <LinkLogo src={name} alt="" containerSize="size-4 rounded-full"/> : null
