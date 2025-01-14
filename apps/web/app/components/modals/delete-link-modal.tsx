@@ -23,7 +23,7 @@ function DeleteModalCallback({
 
     if (!linkProps) return;
     const { shortCode, url , linkId } = linkProps
-    const environmentBasedURL = `${process.env.NODE_ENV === "development" ? "localhost:3000" : "club.sh"}/${shortCode}`
+    const environmentBasedURL = `${process.env.NODE_ENV === "development" ? "localhost:3000" : "club"}/${shortCode}`
     // const {setShowDeleteModal} = useDeleteModal()
     const { isPending, mutate, error } = useMutation({
         mutationFn: fetcher
