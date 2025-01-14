@@ -39,7 +39,7 @@ export default function Bar({
                             group === "country" ? <img src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> : group === "referrer" ? <Link2 size={15} /> : group === "device" ? <LaptopMinimal size={15} /> : group === "browser" ? <Chrome size={15} /> : group === "os" && name === "Windows" ? <RiWindowsFill /> : group === "os"  ? <Shell size={15}/> : group === "url" ? <LinkLogo src={name} alt="" containerSize="size-4 rounded-full"/> : null
                         }
                     </div>
-                    <p>{name.length > 70 ? name.substring(0, 45) + "..." : name}</p>
+                    <p className="truncate">{name}</p>
                 </div>
                 <p className="pr-4">{clicks}</p>
             </div>
