@@ -41,9 +41,17 @@ export const getMetaTags = async (url: string) => {
     const twitterImage = metaTags.find(tag => tag.property === 'twitter:image')?.content;
     const imageSrc = metaTags.find(tag => tag.property === 'image_src')?.content;
 
+
     // Fall back to description meta tag if og:description is not found
     const description = ogDescription || metaTags.find(tag => tag.property === 'description')?.content || "No description";
-
+    console.log('Open graph data:', {
+        ogTitle,
+        ogDescription,
+        ogImage,
+        twitterImage,
+        imageSrc,
+        description
+    });
     return {
         title: ogTitle || titleTag || url,
         description,
