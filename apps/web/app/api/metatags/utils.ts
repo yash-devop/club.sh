@@ -2,7 +2,11 @@ import parse from "node-html-parser";
 
 export const getHtmlfromURL = async (url: string) => {
     try {
-        const html = await fetch(url);
+        const html = await fetch(url, {
+            headers: {
+                "User-Agent": "Club Metatag API (https://club.yashstack.com)"
+            }
+        });
         return html.text()
     } catch (error) {
         return null
@@ -35,6 +39,7 @@ export const getMetaTags = async (url: string) => {
         }
     }
     const { title: titleTag, metaTags } = getHeadTag(html)
+    console.log('metaTags',metaTags);
     const ogTitle = metaTags.find(tag => tag.property === 'og:title')?.content;
     const ogDescription = metaTags.find(tag => tag.property === 'og:description')?.content;
     const ogImage = metaTags.find(tag => tag.property === 'og:image')?.content;
