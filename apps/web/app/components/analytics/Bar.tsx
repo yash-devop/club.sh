@@ -14,35 +14,47 @@ export default function Bar({
     maxCount,
     group,
 }: {
-    name: string,
-    clicks: number,
-    maxCount: number,
-    group: string,
+    name: string;
+    clicks: number;
+    maxCount: number;
+    group: string;
 }) {
-    const dynamicWidth = (clicks / maxCount) * 100
+   
+    const dynamicWidth = maxCount > 0 
+        ? Math.max((clicks / maxCount) * 100 , 30)
+        : 0;
+
     const dynamicBackgrounds = (group: string) => {
         if (group === "device" || group === "browser" || group === "os") return 'bg-green-100';
         else if (group === "country") return 'bg-blue-100';
         else if (group === "referrer") return 'bg-fuchsia-100';
         else if (group === "url") return 'bg-orange-100';
-        else return 'bg-slate-100'
-    }
-    console.log('group: ', group);
+        else return 'bg-slate-100';
+    };
+
     return (
-        <>
-            <div className={`flex items-center justify-between text-sm w-full  gap-4`}>
-                <div style={{
+        <div className="flex items-center justify-between text-sm w-full gap-4">
+            <div
+                style={{
                     width: `${dynamicWidth}%`,
-                }} className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap flex items-center gap-2 max-w-[430px]`}>
-                    <div className="shrink-0">
-                        {
-                            group === "country" ? <img src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> : group === "referrer" ? <Link2 size={15} /> : group === "device" ? <LaptopMinimal size={15} /> : group === "browser" ? <Chrome size={15} /> : group === "os" && name === "Windows" ? <RiWindowsFill /> : group === "os"  ? <Shell size={15}/> : group === "url" ? <LinkLogo src={name} alt="" containerSize="size-4 rounded-full"/> : null
-                        }
-                    </div>
-                    <p className="truncate">{name}</p>
+                }}
+                className={`${dynamicBackgrounds(group)} py-2 px-3 mr-4 rounded-lg font-normal transition-all whitespace-nowrap flex items-center gap-2`}
+            >
+                <div className="shrink-0">
+                    {
+                        group === "country" ? <img src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> :
+                        group === "referrer" ? <Link2 size={15} /> :
+                        group === "device" ? <LaptopMinimal size={15} /> :
+                        group === "browser" ? <Chrome size={15} /> :
+                        group === "os" && name === "Windows" ? <RiWindowsFill /> :
+                        group === "os"  ? <Shell size={15}/> :
+                        group === "url" ? <LinkLogo src={name} alt="" containerSize="size-4 rounded-full"/> :
+                        null
+                    }
                 </div>
-                <p className="pr-4">{clicks}</p>
+                <p className="truncate" title={name}>{name}</p>
             </div>
-        </>
-    )
+            <p className="pr-4" title={clicks.toString()}>{clicks}</p>
+        </div>
+    );
 }
