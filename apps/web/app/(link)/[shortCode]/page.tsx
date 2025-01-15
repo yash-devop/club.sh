@@ -9,8 +9,8 @@ export default async function Page({
         shortCode: string
     },
 }) {
-
-    const response = await fetch(`/api/links/${shortCode}`);
+    const DOMAIN = "https://club.yashstack.com"
+    const response = await fetch(`${DOMAIN}/api/links/${shortCode}`);
     const data = await response.json()
 
     if (response.status === 404 || typeof data.url === "undefined") {
