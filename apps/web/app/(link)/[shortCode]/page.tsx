@@ -10,7 +10,7 @@ export default async function Page({
     },
 }) {
 
-    const response = await fetch(`http://localhost:3000/api/links/${shortCode}`);
+    const response = await fetch(`/api/links/${shortCode}`);
     const data = await response.json()
 
     if (response.status === 404 || typeof data.url === "undefined") {
