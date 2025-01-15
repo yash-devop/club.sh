@@ -7,14 +7,16 @@ export const getHtmlfromURL = async (url: string) => {
                 "User-Agent": "Club Metatag API (https://club.yashstack.com)"
             }
         });
-        return html.text()
+        const text = await html.text()
+        return text
     } catch (error) {
         return null
     }
 }
 
-export const getHeadTag = (url: string) => {
-    const parsedHTML = parse(url)
+export const getHeadTag = (html: string) => {
+    const parsedHTML = parse(html)
+    console.log('parsedHTML',parsedHTML.querySelectorAll("meta"));
     const metaTags = parsedHTML.querySelectorAll("meta").map(({ attributes }) => {
         return {
             property: attributes.property || attributes.name || attributes.href,
@@ -30,6 +32,7 @@ export const getHeadTag = (url: string) => {
 }
 
 export const getMetaTags = async (url: string) => {
+    console.log('url in metatag',url);
     const html = await getHtmlfromURL(url);
     if (!html) {
         return {
