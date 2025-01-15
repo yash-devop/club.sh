@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { getShortCode } from '@club/utils'
 
 import { CreateLinkProps } from '@/lib/types'
-import prisma from "@club/db/client";
+import {prisma} from "@club/db";
 import { ClubApiError, PrismaErrorHandler } from "@/lib/errors";
 import { getSessionFn } from "@/lib/auth/getSession";
 

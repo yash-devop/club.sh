@@ -2,7 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, SessionStrategy } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-import prisma from "@club/db/client";
+import {prisma} from "@club/db";
 
 const GOOGLE_ID = process.env.GOOGLE_ID || "";
 const GOOGLE_SECRET = process.env.GOOGLE_SECRET || "";

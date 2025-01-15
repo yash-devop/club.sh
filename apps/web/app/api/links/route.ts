@@ -1,6 +1,6 @@
 import { getSessionFn } from "@/lib/auth/getSession";
 import { ClubApiError, PrismaErrorHandler } from "@/lib/errors";
-import prisma from "@club/db/client";
+import {prisma} from "@club/db";
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async () => {

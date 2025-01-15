@@ -3,7 +3,7 @@ import { getGeoData } from "@/lib/functions/getGeoData";
 import { getIp } from "@/lib/functions/getIp";
 import { redis } from "@/lib/redis/redis";
 import { publishClickEvents } from "@/lib/tinybird/publish";
-import prisma from "@club/db/client";
+import {prisma} from "@club/db";
 import { getUserAgent, LOCALHOST_GEO_DATA } from "@club/utils";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";

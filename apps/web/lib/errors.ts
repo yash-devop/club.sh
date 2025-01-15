@@ -1,4 +1,4 @@
-import { Prisma } from "@club/db/client";
+import { Prisma } from "@club/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
