@@ -1,4 +1,3 @@
-import { getSessionFn } from "@/lib/auth/getSession";
 import { ClubApiError } from "@/lib/errors";
 import { getGeoData } from "@/lib/functions/getGeoData";
 import { getIp } from "@/lib/functions/getIp";
@@ -9,6 +8,16 @@ import { getUserAgent, LOCALHOST_GEO_DATA } from "@club/utils";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+
+type CachedDataType = {
+    url: string;
+    id: string;
+    title: string | null;
+    description: string | null;
+    image: string | null;
+    clicks: number;
+    userId: string | null;
+}
 
 export const GET = async (req: NextRequest, {
     params: {
@@ -26,6 +35,32 @@ export const GET = async (req: NextRequest, {
         
         if (cachedData) {
             console.log('Cache hit:', cachedData);
+            const data:CachedDataType = JSON.parse(cachedData);
+            const { id: urlId, url, title, description, image, userId } = data;
+            let clicks = data.clicks
+
+            clicks+=1
+
+            const {ipAddress ,browser, country, os,device,referrer,region} = await getMetadata(req)
+            try {
+                const published = await publishClickEvents({
+                    browser,
+                    device,
+                    country,
+                    os,
+                    referrer,
+                    url,
+                    shortCode,
+                    urlClicks: clicks.toString(),
+                    user_id: userId!,
+                    timestamp: new Date().toISOString(),
+                    click_id: nanoid(16),
+                    link_id: urlId
+                });
+                console.log('Published:', published);
+            } catch (error) {
+                console.log('Tinybird error:', error);
+            }
             return NextResponse.json(JSON.parse(cachedData));
         }
 
@@ -55,14 +90,9 @@ export const GET = async (req: NextRequest, {
         const { id: urlId, url, title, description, image, userId, clicks } = existingShortCode;
         console.log('Original URL:', existingShortCode);
 
-        const ipAddress = getIp(req);
-        const { country, region } = process.env.NODE_ENV === "development" ? LOCALHOST_GEO_DATA : await getGeoData(ipAddress);
-        const browser = getUserAgent(headers(), "browser");
-        const device = getUserAgent(headers(), "device");
-        const os = getUserAgent(headers(), "os");
-        const referrer = headers().get("referrer") ?? "direct";
+        const {ipAddress ,browser, country, os,device,referrer,region} = await getMetadata(req)
 
-        console.log('Meta-data:', { country, browser, device, os, referrer });
+        console.log('Meta-data without cache:', { country, browser, device, os, referrer , ipAddress });
 
         // Update click count in the database
         const updatedShortCode = await prisma.link.update({
@@ -83,7 +113,7 @@ export const GET = async (req: NextRequest, {
                 referrer,
                 url: existingShortCode.url,
                 shortCode,
-                urlClicks: String(updatedClicks),
+                urlClicks: updatedClicks.toString(),
                 user_id: existingShortCode.userId!,
                 timestamp: new Date().toISOString(),
                 click_id: nanoid(16),
@@ -103,5 +133,24 @@ export const GET = async (req: NextRequest, {
             return NextResponse.json({ message: error.message }, { status: error.code });
         }
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    }
+}
+
+const getMetadata=async(req:NextRequest)=>{
+    const ipAddress = getIp(req);
+    const { country , region } = process.env.NODE_ENV === "development" ? LOCALHOST_GEO_DATA : await getGeoData(ipAddress);
+    const browser = getUserAgent(headers(), "browser");
+    const device = getUserAgent(headers(), "device");
+    const os = getUserAgent(headers(), "os");
+    const referrer = headers().get("referer") ?? "direct";
+
+    return {
+        ipAddress,
+        country,
+        browser,
+        device,
+        os,
+        referrer,
+        region
     }
 }
