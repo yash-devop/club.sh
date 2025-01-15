@@ -17,7 +17,7 @@ export const getHtmlfromURL = async (url: string) => {
 export const getHeadTag = (html: string) => {
     const parsedHTML = parse(html)
     const metaTags = parsedHTML.querySelectorAll("meta").map(({ attributes }) => {
-        console.log('attributes.property',attributes.property, "and content: ", attributes.content)
+        console.log('attributes.property',attributes.property || attributes.name || attributes.href, "and content: ", attributes.content)
         return {
             property: attributes.property || attributes.name || attributes.href,
             content: attributes.content
