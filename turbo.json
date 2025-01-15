@@ -1,11 +1,23 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "NEXTAUTH_SECRET",
+    "TINYBIRD_API_KEY",
+    "NODE_ENV",
+    "GOOGLE_ID",
+    "GOOGLE_SECRET",
+    "IP_URL",
+    "IP_KEY",
+    "UPSTASH_REDIS_URL",
+    "TINYBIRD_BASE_URL"
+  ],
+  "globalDependencies": ["**/.env.*local", "**/.env", ".env", ".env.local"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**" , "dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
