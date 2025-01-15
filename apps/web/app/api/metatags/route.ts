@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getMetaTags } from "./utils";
 
+
+const CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+  };
+  
 const urlSearchParamsSchema = z.object({
     url: z.string().refine((url) => {
         console.log('url in zod : ', url);
@@ -25,5 +31,14 @@ export const GET = async (req: NextRequest) => {
 
     return NextResponse.json({
         ...metaTags,
+    },{
+        headers: CORS_HEADERS
     })
 }
+
+export function OPTIONS() {
+    return new Response(null, {
+      status: 204,
+      headers: CORS_HEADERS,
+    });
+  }
