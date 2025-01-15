@@ -2,7 +2,7 @@
 import { FormEvent, useCallback, useMemo, useState } from "react";
 import { Button, Input, Modal } from "@club/ui";
 import LinkLogo from "../dashboard/LinkLogo";
-import { fetcher, getUrlwithoutWWW } from "@club/utils";
+import { fetcher } from "@club/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type LinkProps = {
@@ -22,10 +22,10 @@ function DeleteModalCallback({
 }) {
 
     if (!linkProps) return;
-    const { shortCode, url , linkId } = linkProps
+    const { shortCode, url } = linkProps
     const environmentBasedURL = `${process.env.NODE_ENV === "development" ? "localhost:3000" : "club"}/${shortCode}`
     // const {setShowDeleteModal} = useDeleteModal()
-    const { isPending, mutate, error } = useMutation({
+    const { isPending, mutate } = useMutation({
         mutationFn: fetcher
     })
     // const urlWithoutWWW = getUrlwithoutWWW(environmentBasedURL)

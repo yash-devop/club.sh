@@ -15,10 +15,8 @@ export default function LinkLogo({
 } & ImageProps) {
     const [error, setError] = useState(false)
     const [errorUrl , setErrorUrl] = useState("")
-    const [src, setSrc] = useState(props.src)
     useEffect(() => {
         setError(false)
-        setSrc(props.src)
     }, [props.src]);
 
     const handleLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {

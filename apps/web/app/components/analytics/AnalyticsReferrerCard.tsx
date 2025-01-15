@@ -4,9 +4,7 @@ import { MousePointerClick } from "lucide-react";
 import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
 import { fetcher } from "@club/utils";
-import Bar from "./Bar";
 import { BarList } from "./BarList";
-import { Suspense } from "react";
 
 type ReferrerResponse = {
   referrers: {
@@ -31,9 +29,6 @@ export function AnalyticsReferrerCard<T extends string>({
 
   const {
     data: referrerData,
-    isFetching,
-    error,
-    isError,
   } = useQuery<ReferrerResponse>({
     queryKey: ["referrer_clicks"],
     queryFn: () => {

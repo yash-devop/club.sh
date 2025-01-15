@@ -1,5 +1,5 @@
 import { getSessionFn } from "@/lib/auth/getSession"
-import { getCountryClicksTB, getDevicesTB, getReferrersTB } from "@/lib/tinybird/pipes"
+import { getReferrersTB } from "@/lib/tinybird/pipes"
 import { NextResponse } from "next/server"
 
 export const GET = async () => {

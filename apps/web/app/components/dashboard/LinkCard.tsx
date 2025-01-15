@@ -1,9 +1,8 @@
 "use client"
 
-import { CornerDownRight, Delete, EllipsisVertical, PencilIcon, QrCode } from "lucide-react";
+import { CornerDownRight, Delete, EllipsisVertical, QrCode } from "lucide-react";
 import { formatDistanceToNow } from 'date-fns'
 import {
-    Button,
     cn,
     DropdownMenu,
     DropdownMenuContent,

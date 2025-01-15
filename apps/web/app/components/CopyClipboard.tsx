@@ -8,12 +8,12 @@ const CopyClipboard = ({
     textRef: React.MutableRefObject<HTMLSpanElement | null>
 }) => {
     const [isCopying, setIsCopying] = useState(false);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const timeoutRef = useRef<number | undefined>(undefined); // Use number | undefined for browser compatibility
     const handleCopy = async () => {
         try {
             setIsCopying(true)
             navigator.clipboard.writeText(textRef?.current?.textContent || '').then(() => {
-                timeoutRef.current = setTimeout(() => {
+                timeoutRef.current = window.setTimeout(() => { // Use window.setTimeout for browser
                     setIsCopying(false);
                 }, 5000);
             });
@@ -26,7 +26,7 @@ const CopyClipboard = ({
     useEffect(() => {
         return () => {
             if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
+                clearTimeout(timeoutRef.current); // clearTimeout works in the browser environment
             }
         };
     }, [])

@@ -2,11 +2,8 @@
 
 import { MousePointerClick } from "lucide-react";
 import Tabs from "./Tabs";
-import { getDevicesTB } from "@/lib/tinybird/pipes";
-import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetcher } from "@club/utils";
-import Bar from "./Bar";
 import { BarList } from "./BarList";
 
 
@@ -42,8 +39,6 @@ export function AnalyticsDevicesCard<T extends string>({
     const {
         data: deviceData,
         isFetching,
-        error,
-        isError
     } = useQuery<DevicesResponse>({
         queryKey: ['devices_clicks'],
         queryFn: () => {

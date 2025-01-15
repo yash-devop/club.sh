@@ -4,7 +4,6 @@ import { MousePointerClick } from "lucide-react";
 import Tabs from "./Tabs";
 import { useQuery } from "@tanstack/react-query";
 import { fetcher } from "@club/utils";
-import Bar from "./Bar";
 import { BarList } from "./BarList";
 
 type CountryResponse = {
@@ -30,8 +29,6 @@ export function AnalyticsCountryCard<T extends string>({
     const {
         data: countryData,
         isFetching,
-        error,
-        isError
     } = useQuery<CountryResponse>({
         queryKey: ['country_clicks'],
         queryFn: () => {

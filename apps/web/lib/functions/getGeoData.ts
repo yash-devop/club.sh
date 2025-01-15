@@ -11,7 +11,6 @@ export const getGeoData = async (ipAddress: string): Promise<{
         }
     });
     const {
-        ip,
         location: {
             country,
             region

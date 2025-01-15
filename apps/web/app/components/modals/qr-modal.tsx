@@ -19,7 +19,7 @@ function QRModalCallback({
     linkProps?: LinkProps
 }) {
     if (!linkProps) return;
-    const { shortCode, url } = linkProps
+    const { url } = linkProps
 
     const [src, setSrc] = useState<string>("");
 

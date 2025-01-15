@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const AuthLayout = ({
     variant,
     children
@@ -8,7 +10,8 @@ export const AuthLayout = ({
     return (
         <>
             <div className="h-screen w-full flex">
-                <div className="h-full w-full flex flex-col gap-4 items-center justify-center  mx-auto">
+                {/* Content Section */}
+                <div className="h-full w-full flex flex-col gap-4 items-center justify-center mx-auto border-r border-gray-300">
                     <div className="h-full w-full flex flex-col gap-4 items-center justify-center mx-auto">
                         <p className="text-[35px] md:text-[40px] font-semibold tracking-[-2px] py-4">club</p>
                         <div className="max-w-md w-full mx-auto flex flex-col justify-center h-fit md:rounded-2xl">
@@ -19,18 +22,23 @@ export const AuthLayout = ({
                                 {children}
                             </div>
                         </div>
-                        {/* <div className="text-sm">{variant === "login" ? <p>Don't have an account ? <Link className="underline" href={"/signup"}>Sign up</Link></p> : <p>Already have an account ? <Link className="underline" href={"/signin"}>Sign in</Link></p>}</div> */}
-                    
                     </div>
                     <p className="pb-10 font-normal text-black/50 cursor-default select-none">© {new Date().getFullYear()} club</p>
                 </div>
-                <div className="h-full w-2/3 overflow-hidden relative border-l hidden lg:flex">
-                <div className="absolute inset-0 -z-10 h-full w-full bg-gray-50/90 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                    <div className="bg-resd-400 h-[800pxs] w-screen absolute bottom-0 -left-10 rounded-xl rounded-b-none p-2 flex items-center justify-center overflow-hidden">
-                        <img src="img_signin.png" className="object-cover h-full"/>
+
+                {/* Right Image Section */}
+                <div className="h-full w-2/3 overflow-hidden relative hidden lg:flex   ">
+                    <div className="absolute -z-10 h-full bg-[#e0e0e0] w-full bg-sblue-400 bg-[radial-gradient(#8c8c8c_1px,transparent_1px)] [background-size:16px_16px]">
+                        <Image 
+                            layout="fill" 
+                            unoptimized 
+                            alt="user-pfp" 
+                            src="/img_signin.png" 
+                            className="object-cover absolute inset-0 right-0 object-left pl-10 py-10" 
+                        />
                     </div>
                 </div>
             </div>
         </>
-    )
-}
+    );
+};

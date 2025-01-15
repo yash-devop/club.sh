@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button, Input, Modal } from "@club/ui";
-import { Globe, HelpCircle, Loader2, Lock, Shuffle } from "lucide-react";
+import { HelpCircle, Loader2,  Shuffle } from "lucide-react";
 import LinkLabel from "../dashboard/LinkLabel";
 import { useLink } from "@/lib/query/use-links";
 import { getShortCode } from "@club/utils";
@@ -28,8 +28,6 @@ function CreateLinkModalCallback({
 }) {
     const { register, handleSubmit, formState: {
         errors,
-        isSubmitting,
-
     }, setError, setValue } = useForm<CreateLinkSchemaType>({
         resolver: zodResolver(createLinkSchema)
     })
@@ -74,7 +72,7 @@ function CreateLinkModalCallback({
                     })
                 }
             },
-            onSuccess: (data)=>{
+            onSuccess: ()=>{
                 setShowCreateLinkModal(false);
                 invalidateLinks()
             }

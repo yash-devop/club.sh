@@ -1,9 +1,10 @@
-import { Chrome, LaptopMinimal, Link, Link2, Shell } from "lucide-react";
+import { Chrome, LaptopMinimal, Link2, Shell } from "lucide-react";
 import React from "react"
 
 
 import type { SVGProps } from 'react';
 import LinkLogo from "../dashboard/LinkLogo";
+import Image from "next/image";
 
 export function RiWindowsFill(props: SVGProps<SVGSVGElement>) {
     return (<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="black" d="m3.001 5.479l7.377-1.016v7.127H3zm0 13.042l7.377 1.017v-7.04H3zm8.188 1.125L21.001 21v-8.502h-9.812zm0-15.292v7.236h9.812V3z"></path></svg>);
@@ -42,7 +43,7 @@ export default function Bar({
             >
                 <div className="shrink-0">
                     {
-                        group === "country" ? <img src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> :
+                        group === "country" ? <Image width={20} height={20} src={`https://flag.vercel.app/m/${name.toUpperCase() || "IN"}.svg`} alt="country_logo" className="w-5" /> :
                         group === "referrer" ? <Link2 size={15} /> :
                         group === "device" ? <LaptopMinimal size={15} /> :
                         group === "browser" ? <Chrome size={15} /> :

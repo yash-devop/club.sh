@@ -7,7 +7,7 @@ import {
     DropdownMenuTrigger
 } from '@club/ui'
 import { getInitialsCharacters } from "@club/utils"
-import { getServerSession, Session } from "next-auth"
+import { Session } from "next-auth"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 

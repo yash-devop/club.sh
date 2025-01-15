@@ -1,5 +1,4 @@
-import { Label, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@club/ui";
-import { HelpCircle } from "lucide-react";
+import { Label, Tooltip, TooltipContent, TooltipTrigger } from "@club/ui";
 import React from "react";
 
 export default function LinkLabel({

@@ -1,6 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, SessionStrategy } from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import prisma from "@club/db/client";
@@ -36,7 +35,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
       }
       return token;
     },
-    async signIn({ user, account }) {
+    async signIn({ user }) {
       // Check if the user exists, if not, create a new one
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email as string },
@@ -69,7 +68,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
       // }
       // return true;
     },
-    session: async ({ session, token, user }) => {
+    session: async ({ session, token }) => {
       return {
         ...session,
         user: {

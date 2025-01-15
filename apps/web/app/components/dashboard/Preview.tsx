@@ -1,5 +1,5 @@
 import { CreateLinkProps } from "@/lib/types"
-import { cn, Facebook, LinkedIn, SkeletonBar, Twitter } from "@club/ui"
+import { Facebook, LinkedIn, SkeletonBar, Twitter } from "@club/ui"
 import { Image as Gallery, Loader2 } from "lucide-react"
 import Image from 'next/image'
 
@@ -32,7 +32,6 @@ const PreviewHeader = ({
 export const TwitterCard = ({
     title,
     image,
-    description,
     generatingMetaTags
 }: {
     image: string,
@@ -73,9 +72,7 @@ export const TwitterCard = ({
 }
 
 export const FacebookCard = ({
-    title,
     image,
-    description,
     generatingMetaTags
 }: {
     image: string,
@@ -128,9 +125,7 @@ export const FacebookCard = ({
     )
 }
 export const LinkedInCard = ({
-    title,
     image,
-    description,
     generatingMetaTags
 }: {
     image: string,

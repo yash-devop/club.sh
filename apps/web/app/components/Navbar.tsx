@@ -1,8 +1,8 @@
-import { Button, MaxWidthContainer } from "@club/ui";
+import { MaxWidthContainer } from "@club/ui";
 import SignupButton from "./SignupButton";
 import Link from "next/link";
 import { getSessionFn } from "@/lib/auth/getSession";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 export default async function Navbar() {
   const session = await getSessionFn();
 

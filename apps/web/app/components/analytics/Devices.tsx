@@ -1,8 +1,6 @@
 "use client"
 
-import { cn } from "@club/ui"
 import React, { useState } from "react"
-import { AnalyticsLinksCard } from "./AnalyticsLinksCard"
 import { AnalyticsDevicesCard } from "./AnalyticsDevicesCard"
 
 type DevicesType = "devices" | "browser" | "os"

@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Github, Google, Input } from "@club/ui"
+import { Button, Github, Google } from "@club/ui"
 import { signIn } from "next-auth/react"
 import { useState } from "react"
 

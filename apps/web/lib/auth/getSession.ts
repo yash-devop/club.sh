@@ -1,4 +1,4 @@
-import { getServerSession, NextAuthOptions } from "next-auth";
+import { getServerSession } from "next-auth";
 import { NEXT_AUTH_OPTIONS } from "./options";
 
 interface User {

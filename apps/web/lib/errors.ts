@@ -12,18 +12,6 @@ export const ErrorCode = z.enum([
     "conflict",
 ]);
 
-const errorCodeToHttpStatus: Record<z.infer<typeof ErrorCode>, number> = {
-    bad_request: 400,
-    unauthorized: 401,
-    forbidden: 403,
-    not_found: 404,
-    conflict: 409,
-    rate_limit_exceeded: 429,
-    internal_server_error: 500,
-};
-
-
-
 export class ClubApiError extends Error {
     public readonly errorName: z.infer<typeof ErrorCode>;
     public readonly code: number

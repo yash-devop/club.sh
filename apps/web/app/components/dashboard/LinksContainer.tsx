@@ -201,7 +201,7 @@ export default function LinksContainer() {
                     className={`flex flex-col gap-4 ${isTransitioning ? 'blur-[1px] transition-opacity' : 'blur-0'} transition-all duration-200`}
                 >
                     {links && links.length > 0 ? (
-                        links.map(({ id, title, image, url, shortCode, user, createdAt }) => (
+                        links.map(({ id, url, shortCode, user, createdAt }) => (
                             <div key={id}>
                                 <LinkCard
                                     linkId={id}

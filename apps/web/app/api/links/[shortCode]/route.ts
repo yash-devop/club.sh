@@ -36,12 +36,12 @@ export const GET = async (req: NextRequest, {
         if (cachedData) {
             console.log('Cache hit:', cachedData);
             const data:CachedDataType = JSON.parse(cachedData);
-            const { id: urlId, url, title, description, image, userId } = data;
+            const { id: urlId, url, userId } = data;
             let clicks = data.clicks
 
             clicks+=1
 
-            const {ipAddress ,browser, country, os,device,referrer,region} = await getMetadata(req)
+            const {browser, country, os,device,referrer} = await getMetadata(req)
             try {
                 const published = await publishClickEvents({
                     browser,
@@ -87,10 +87,10 @@ export const GET = async (req: NextRequest, {
             });
         }
 
-        const { id: urlId, url, title, description, image, userId, clicks } = existingShortCode;
+        const { id: urlId, url, title, description, image, clicks } = existingShortCode;
         console.log('Original URL:', existingShortCode);
 
-        const {ipAddress ,browser, country, os,device,referrer,region} = await getMetadata(req)
+        const {ipAddress ,browser, country, os,device,referrer} = await getMetadata(req)
 
         console.log('Meta-data without cache:', { country, browser, device, os, referrer , ipAddress });
 

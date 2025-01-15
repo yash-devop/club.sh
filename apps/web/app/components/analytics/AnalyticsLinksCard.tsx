@@ -29,8 +29,6 @@ export function AnalyticsLinksCard<T extends string>({
     const {
         data: linksData,
         isFetching,
-        error,
-        isError
     } = useQuery<LinkResponse>({
         queryKey: ['links_clicks'],
         queryFn: () => {
