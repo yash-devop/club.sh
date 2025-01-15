@@ -16,8 +16,8 @@ export const getHtmlfromURL = async (url: string) => {
 
 export const getHeadTag = (html: string) => {
     const parsedHTML = parse(html)
-    console.log('parsedHTML',parsedHTML.querySelectorAll("meta"));
     const metaTags = parsedHTML.querySelectorAll("meta").map(({ attributes }) => {
+        console.log('attributes.property',attributes.property, "and content: ", attributes.content)
         return {
             property: attributes.property || attributes.name || attributes.href,
             content: attributes.content
@@ -42,7 +42,6 @@ export const getMetaTags = async (url: string) => {
         }
     }
     const { title: titleTag, metaTags } = getHeadTag(html)
-    console.log('metaTags',metaTags);
     const ogTitle = metaTags.find(tag => tag.property === 'og:title')?.content;
     const ogDescription = metaTags.find(tag => tag.property === 'og:description')?.content;
     const ogImage = metaTags.find(tag => tag.property === 'og:image')?.content;
