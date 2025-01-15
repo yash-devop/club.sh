@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import { getSessionFn } from "@/lib/auth/getSession";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 export default async function Home() {
   const creator = "https://portfolio.yashstack.com";
   const session = await getSessionFn();
@@ -65,9 +66,12 @@ export default async function Home() {
               <div className="border-l border-r max-w-[1050px] w-full h-full relative ">
                 <div className="overflow-hidden w-full h-full p-2 bg-[#f5f5f3]">
                   <div className="border p-2 rounded-xl">
-                    <img
+                    <Image
                       src="/img_home.png"
-                      alt=""
+                      width={800}
+                      height={800}
+                      unoptimized
+                      alt="landing-page-image"
                       className="object-cover w-full rounded-lg select-none pointer-events-none"
                     />
                   </div>
@@ -135,9 +139,12 @@ export default async function Home() {
               <p className="font-mono text-[#7a7a7a] text-sm">FEATURES</p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
                 <div className=" bg-[#1e1e1edc] border rounded-xl overflow-hidden relative">
-                  <img
+                  <Image
                     src="/img_links.png"
-                    alt=""
+                    width={400}
+                    height={400}
+                    unoptimized
+                    alt="img_1"
                     className="object-contain w-[400px] translate-x-8 translate-y-5 rounded-md"
                   />
                   <div className="bg-white w-full h-[80px] absolute bottom-0 px-4 py-4 overflow-hidden space-y-1">
@@ -148,9 +155,12 @@ export default async function Home() {
                   </div>
                 </div>
                 <div className="  bg-[#1e1e1edc] border rounded-xl overflow-hidden relative">
-                  <img
+                  <Image
                     src="/img_createlink.png"
-                    alt=""
+                    width={400}
+                    height={400}
+                    unoptimized
+                    alt="img_2"
                     className="object-contain w-[400px] translate-x-8 translate-y-5 rounded-md"
                   />
                   <div className="bg-white w-full h-[80px] absolute bottom-0 px-4 py-4 overflow-hidden space-y-1">
@@ -163,9 +173,12 @@ export default async function Home() {
                   </div>
                 </div>
                 <div className="  bg-[#1e1e1edc] border rounded-xl overflow-hidden relative">
-                  <img
+                  <Image
                     src="/img_analytics.png"
-                    alt=""
+                    width={400}
+                    height={400}
+                    unoptimized
+                    alt="img_3"
                     className="object-contain w-[400px] translate-x-8 translate-y-5 rounded-md"
                   />
                   <div className="bg-white w-full h-[80px] absolute bottom-0 px-4 py-4 overflow-hidden space-y-1">
@@ -176,9 +189,12 @@ export default async function Home() {
                   </div>
                 </div>
                 <div className="  bg-[#1e1e1edc] border rounded-xl overflow-hidden relative">
-                  <img
+                  <Image
                     src="/img_qr.png"
-                    alt=""
+                    width={400}
+                    height={400}
+                    unoptimized
+                    alt="img_4"
                     className="object-contain w-[400px] translate-x-8 translate-y-5 rounded-md"
                   />
                   <div className="bg-white w-full h-[80px] absolute bottom-0 px-4 py-4 overflow-hidden space-y-1">
