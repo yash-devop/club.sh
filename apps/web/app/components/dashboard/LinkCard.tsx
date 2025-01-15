@@ -48,6 +48,8 @@ export default function LinkCard({
 
 
     console.log('linkId in card: ', linkId);
+
+    const DOMAIN = "club.yashstack.com"
     return (
         <>
             <div className={`bg-white border rounded-xl hover:shadow-2xl hover:shadow-gray-200 transition-all ${cn(isPending ? "blur-[102px]" : "blur-0")}`}>
@@ -59,7 +61,7 @@ export default function LinkCard({
                     <div className="flex items-center justify-between gap min-w-0 w-full">
                         <div className="flex flex-col min-w-0">
                             <div className="flex items-center gap-3">
-                                <span id="shortUrl" ref={textRef} className="font-medium text-sm">{`${process.env.NODE_ENV === "development" ? "localhost:3000" : "club"}/${shortCode}`}</span>
+                                <span id="shortUrl" ref={textRef} className="font-medium text-sm">{`${process.env.NODE_ENV === "development" ? "localhost:3000" : DOMAIN}/${shortCode}`}</span>
                                 <CopyToClipBoard textRef={textRef} />
                             </div>
                             <div className="flex items-center gap-3 min-w-0">
