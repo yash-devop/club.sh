@@ -3,17 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "exports":{
+  "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
-    "db:generate": "prisma generate",
-    "db:seed": "prisma db seed"
+    "db:generate": "npx prisma generate",
+    "db:seed": "npx prisma db seed"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.2.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.2.1"
+  }
 }
