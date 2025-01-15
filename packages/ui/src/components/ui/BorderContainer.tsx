@@ -1,4 +1,4 @@
-import { cn } from "@club/ui/lib/utils"
+import { cn } from "@club/ui"
 
 export const BorderContainer = ({
     children,

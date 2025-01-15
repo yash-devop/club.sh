@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "@club/ui/lib/utils";
+import { cn } from "@club/ui";
 import { Button } from "./button"
 import {
     Dialog,
