@@ -36,7 +36,7 @@ export default function LinkCard({
 }) {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const {setShowQRModal , QRCallback} = useQrModal();
-    const {showDeleteModal , setShowDeleteModal , DeleteCallback} = useDeleteModal()
+    const {setShowDeleteModal , DeleteCallback} = useDeleteModal()
     const textRef = useRef(null);
     // this useEffect is just for the blur transition after the react-query api call. 
     useEffect(() => {
@@ -60,7 +60,7 @@ export default function LinkCard({
                     <div className="flex items-center justify-between gap min-w-0 w-full">
                         <div className="flex flex-col min-w-0">
                             <div className="flex items-center gap-3">
-                                <span id="shortUrl" ref={textRef} className="font-medium text-sm">{`${process.env.NODE_ENV === "development" ? "localhost:3000" : "club.sh"}/${shortCode}`}</span>
+                                <span id="shortUrl" ref={textRef} className="font-medium text-sm">{`${process.env.NODE_ENV === "development" ? "localhost:3000" : "club"}/${shortCode}`}</span>
                                 <CopyToClipBoard textRef={textRef} />
                             </div>
                             <div className="flex items-center gap-3 min-w-0">
