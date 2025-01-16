@@ -37,6 +37,7 @@ export const getHeadTag = (html: string) => {
 export const getMetaTags = async (url: string) => {
   const html = await getHtmlfromURL(url);
   if (!html) {
+    console.log('NO HTML BRO');
     return {
       title: url,
       description: "No description",
