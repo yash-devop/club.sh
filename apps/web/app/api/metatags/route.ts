@@ -26,11 +26,11 @@ const urlSearchParamsSchema = z.object({
 });
 
 export const GET = async (req: NextRequest) => {
-  const { url } = urlSearchParamsSchema.parse({
-    url: req.nextUrl.searchParams.get("url"),
-  });
+  // const { url } = urlSearchParamsSchema.parse({
+  //   url: req.nextUrl.searchParams.get("url"),
+  // });
 
-  const options = { url };
+  const options = { url: "https://www.youtube.com/watch?v=NshOzi1XRK8&ab_channel=monyetvlr" };
   const {result , response} = await ogs(options)
 
   console.log('response in metatag',response);
