@@ -198,7 +198,7 @@ function CreateLinkModalCallback({
                         </div>
                         <div className=" h-full overflow-auto flex flex-col gap-4 scrollbar-hide px-5 py-3 bg-white rounded-br-lg">
                             <div className="flex flex-col gap-2">
-                                <Preview data={data} generatingMetatags={generatingMetatags} />
+                                <Preview data={data} generatingMetatags={generatingMetatags} url={debouncedUrl}/>
                             </div>
                         </div>
                     </div>
