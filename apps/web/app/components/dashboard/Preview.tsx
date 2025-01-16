@@ -97,7 +97,7 @@ export const FacebookCard = ({
                             </div>
                             <div className="bg-gray-100 border-b border-l border-r border-gray-300 p-3 space-y-1">
                                 <p className="font-light text-xs uppercase text-slate-400">youtube.com</p>
-                                <p className="font-semibold text-sm">{url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}</p>
+                                <p className="font-semibold text-sm max-w-md truncate" title={url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}>{url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}</p>
                                 <p className="font-light text-sm">No description</p>
                             </div>
                         </div>
@@ -154,7 +154,7 @@ export const LinkedInCard = ({
                                         <Image src={image} alt="testing" width={40} height={40} className="object-cover w-full h-full" unoptimized />
                                     </div>
                                     <div className="bg-gray-100 border-b border-l border-r border-gray-300 p-3 space-y-1">
-                                        <p className="font-semibold text-sm">{url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}</p>
+                                        <p className="font-semibold text-sm max-w-md truncate" title={url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}>{url || "https://www.youtube.com/watch?v=jt5bqO_r2DQ"}</p>
                                         <p className="font-light text-sm">No description</p>
                                     </div>
                                 </div>
