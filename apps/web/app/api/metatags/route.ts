@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-// import { getMetaTags } from "./utils";
-import ogs from "open-graph-scraper";
+import { getMetaTags } from "./utils";
+
+export const runtime = "edge";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -26,27 +27,17 @@ const urlSearchParamsSchema = z.object({
 });
 
 export const GET = async (req: NextRequest) => {
-  // const { url } = urlSearchParamsSchema.parse({
-  //   url: req.nextUrl.searchParams.get("url"),
-  // });
+  const { url } = urlSearchParamsSchema.parse({
+    url: req.nextUrl.searchParams.get("url"),
+  });
 
-  const options = { url: "https://www.youtube.com/watch?v=NshOzi1XRK8&ab_channel=monyetvlr" };
-  const {result , response} = await ogs(options)
+  const metaTags = await getMetaTags(url)
 
-  console.log('response in metatag',response);
   return NextResponse.json({
-    title: result.ogTitle || "No title",
-    description: result.ogDescription || "No description",
-    image: result.ogImage?.[0]?.url || "No image"
+      ...metaTags,
+  },{
+      headers: CORS_HEADERS
   })
-
-  // const metaTags = await getMetaTags(url)
-
-  // return NextResponse.json({
-  //     ...metaTags,
-  // },{
-  //     headers: CORS_HEADERS
-  // })
 };
 
 export function OPTIONS() {
