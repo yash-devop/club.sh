@@ -10,6 +10,7 @@
     "prisma:docker": "cd packages/db && npx prisma migrate dev"
   },
   "devDependencies": {
+    "@types/open-graph": "^0.2.5",
     "prettier": "^3.2.5",
     "turbo": "^2.1.1",
     "typescript": "^5.4.5"
@@ -23,6 +24,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "ioredis": "^5.4.1"
+    "ioredis": "^5.4.1",
+    "open-graph": "^0.2.6"
   }
 }
