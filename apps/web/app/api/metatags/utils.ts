@@ -1,6 +1,6 @@
 import parse from "node-html-parser";
 import he from "he";
-
+import fetch from "node-fetch"
 export const getHtmlfromURL = async (url: string) => {
   try {
     // const html = await fetch(url, {
