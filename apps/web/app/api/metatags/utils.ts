@@ -3,11 +3,10 @@ import he from "he";
 
 export const getHtmlfromURL = async (url: string) => {
   try {
-
     const options = {
       method: "GET",
       headers: {
-        "User-Agent":"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36",
       },
     };
     const html = await fetch(url, options);
@@ -31,19 +30,28 @@ export const getHeadTag = (html: string) => {
     metaTags,
     title,
   };
-  // console.log('parsed html : ', title);
 };
 
 export const getMetaTags = async (url: string) => {
+  // YouTube-specific hack
+  if (url.includes("youtube.com")) {
+    return {
+      title: "YouTube",
+      description: "YouTube",
+      image: "https://www.youtube.com/img/desktop/yt_1200.png",
+    };
+  }
+
   const html = await getHtmlfromURL(url);
   if (!html) {
-    console.log('NO HTML BRO');
+    console.log("NO HTML BRO");
     return {
       title: url,
       description: "No description",
       image: null,
     };
   }
+
   const { metaTags, title: titleTag } = getHeadTag(html);
 
   let object: { [key: string]: string | undefined } = {};
